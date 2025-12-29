@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "532571999944",
+    "project_id": "pinlok-al",
+    "storage_bucket": "pinlok-al.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532571999944:android:67f5797f0f3189648e9ffd",
+        "android_client_info": {
+          "package_name": "com.alya.pinlok"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHPrvbRz73Fycuz58G_YV0RT8hMSGhPIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
