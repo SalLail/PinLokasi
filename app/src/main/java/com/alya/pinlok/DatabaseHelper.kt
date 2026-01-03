@@ -2,12 +2,11 @@ package com.alya.pinlok
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class DatabaseHelper(context: Context) :
-    SQLiteOpenHelper(context, "pinlokasi.db", null, 1) {
+    SQLiteOpenHelper(context, "pinlokasi.db", null, 2) { // bump version to 2
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
@@ -17,23 +16,33 @@ class DatabaseHelper(context: Context) :
                 name TEXT,
                 note TEXT,
                 latitude REAL,
-                longitude REAL
+                longitude REAL,
+                photo TEXT
             )
         """)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS lokasi")
-        onCreate(db)
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE lokasi ADD COLUMN photo TEXT")
+        }
     }
 
-    fun insertLocation(userId: String, name: String, note: String, lat: Double, lng: Double) {
+    fun insertLocation(
+        userId: String,
+        name: String,
+        note: String,
+        lat: Double,
+        lng: Double,
+        photoPath: String
+    ) {
         val values = ContentValues().apply {
             put("userId", userId)
             put("name", name)
             put("note", note)
             put("latitude", lat)
             put("longitude", lng)
+            put("photo", photoPath)
         }
         writableDatabase.insert("lokasi", null, values)
     }
@@ -50,7 +59,8 @@ class DatabaseHelper(context: Context) :
                     name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
                     note = cursor.getString(cursor.getColumnIndexOrThrow("note")),
                     lat = cursor.getDouble(cursor.getColumnIndexOrThrow("latitude")),
-                    lng = cursor.getDouble(cursor.getColumnIndexOrThrow("longitude"))
+                    lng = cursor.getDouble(cursor.getColumnIndexOrThrow("longitude")),
+                    photo = cursor.getString(cursor.getColumnIndexOrThrow("photo")) ?: ""
                 )
             )
         }
