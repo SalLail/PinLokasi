@@ -38,10 +38,24 @@ class DatabaseHelper(context: Context) :
         writableDatabase.insert("lokasi", null, values)
     }
 
-    fun getLocationsByUser(userId: String): Cursor {
-        return readableDatabase.rawQuery(
+    fun getLocationsByUser(userId: String): List<LocationModel> {
+        val cursor = readableDatabase.rawQuery(
             "SELECT * FROM lokasi WHERE userId = ?", arrayOf(userId)
         )
+        val list = mutableListOf<LocationModel>()
+        while (cursor.moveToNext()) {
+            list.add(
+                LocationModel(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
+                    note = cursor.getString(cursor.getColumnIndexOrThrow("note")),
+                    lat = cursor.getDouble(cursor.getColumnIndexOrThrow("latitude")),
+                    lng = cursor.getDouble(cursor.getColumnIndexOrThrow("longitude"))
+                )
+            )
+        }
+        cursor.close()
+        return list
     }
 
     fun updateLocation(id: Int, name: String, note: String) {
@@ -49,10 +63,10 @@ class DatabaseHelper(context: Context) :
             put("name", name)
             put("note", note)
         }
-        writableDatabase.update("lokasi", values, "id=?", arrayOf(id.toString()))
+        writableDatabase.update("lokasi", values, "id = ?", arrayOf(id.toString()))
     }
 
     fun deleteLocation(id: Int) {
-        writableDatabase.delete("lokasi", "id=?", arrayOf(id.toString()))
+        writableDatabase.delete("lokasi", "id = ?", arrayOf(id.toString()))
     }
 }

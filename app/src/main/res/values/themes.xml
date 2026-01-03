@@ -1,9 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
+    <!-- Base application theme -->
     <style name="Base.Theme.PinLok" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Warna utama aplikasi -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+
+        <!-- Warna sekunder -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+
+        <!-- Warna background -->
+        <item name="android:colorBackground">@android:color/white</item>
+
+        <!-- Warna status bar -->
+        <item name="android:statusBarColor">@color/purple_700</item>
+
+        <!-- Warna tombol navigasi -->
+        <item name="android:navigationBarColor">@color/purple_500</item>
     </style>
 
+    <!-- Theme utama aplikasi -->
     <style name="Theme.PinLok" parent="Base.Theme.PinLok" />
+
 </resources>

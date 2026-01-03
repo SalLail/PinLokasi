@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.alya.pinlok">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -15,7 +16,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCVu8Qr3N1gs4uXkABc8qF4K1PImjIWorw" />
+            android:value="@string/google_maps_key" />
 
         <!-- LAUNCHER harus LoginActivity -->
         <activity
@@ -36,6 +37,12 @@
         <activity
             android:name=".MapsActivity"
             android:exported="true" />
+
+        <!-- Saved Locations -->
+        <activity
+            android:name=".SavedLocationsActivity"
+            android:exported="true" />
+
 
     </application>
 
